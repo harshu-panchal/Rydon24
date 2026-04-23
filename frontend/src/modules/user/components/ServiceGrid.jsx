@@ -9,9 +9,9 @@ const ServiceTile = ({ icon, label, description, path, accentClass, loading }) =
 
   if (loading) {
     return (
-      <div className="flex w-full animate-pulse flex-col items-center justify-center gap-1.5 rounded-[18px] border border-gray-50 bg-gray-50 px-1.5 py-2.5">
-        <div className="h-12 w-12 rounded-[18px] bg-gray-200" />
-        <div className="h-3 w-12 rounded-full bg-gray-200" />
+      <div className="flex w-full animate-pulse flex-col items-center justify-center gap-1.5 rounded-[20px] border border-gray-100 bg-gray-50/50 px-1 py-3">
+        <div className="h-10 w-10 rounded-xl bg-gray-200/80" />
+        <div className="h-3 w-12 rounded-full bg-gray-200/80" />
       </div>
     );
   }
@@ -19,20 +19,23 @@ const ServiceTile = ({ icon, label, description, path, accentClass, loading }) =
   return (
     <motion.button
       type="button"
-      whileHover={{ y: -1.5 }}
+      whileHover={{ y: -1.5, scale: 1.01 }}
       whileTap={{ scale: 0.98 }}
       onClick={() => path && navigate(path)}
-      className="flex w-full flex-col items-center justify-center gap-1.5 rounded-[18px] border border-white/80 bg-white/90 px-1.5 py-2.5 shadow-[0_8px_14px_rgba(15,23,42,0.05)] transition-transform"
+      className={`group relative flex w-full flex-col items-center justify-center gap-1.5 rounded-[22px] border border-white/60 ${accentClass || 'bg-white/90'} px-1.5 py-3.5 shadow-[0_6px_16px_rgba(0,0,0,0.04)] transition-all duration-300`}
     >
-      <div className={`flex h-12 w-12 items-center justify-center rounded-[18px] ${accentClass || 'bg-gray-50'}`}>
-        <img src={icon} alt={label} className="h-10 w-10 object-contain drop-shadow-sm" />
+      <div className="relative flex h-12 w-12 items-center justify-center transition-transform duration-300 group-hover:scale-110">
+        <img 
+          src={icon} 
+          alt={label} 
+          className="h-full w-full object-contain drop-shadow-sm" 
+        />
       </div>
 
-      <div className="flex flex-col items-center gap-0.5 text-center">
-        <span className="min-h-[24px] text-[10.5px] font-black leading-tight tracking-tight text-slate-900 line-clamp-2 uppercase">
+      <div className="flex flex-col items-center text-center">
+        <span className="min-h-[24px] text-[10px] font-black leading-[1.1] tracking-tight text-slate-900 line-clamp-2 uppercase">
           {label}
         </span>
-        <span className="sr-only">{description}</span>
       </div>
     </motion.button>
   );
